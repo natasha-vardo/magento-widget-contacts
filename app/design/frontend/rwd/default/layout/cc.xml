@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<layout>
+    <widgetcontacts_index_index>
+        <reference name="head">
+        <action method="addCss">
+            <stylesheet>css/company-contacts.css</stylesheet>
+        </action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" template="cc/contactspage.phtml" />
+        </reference>
+        <update handle="cms_menu"/>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+    </widgetcontacts_index_index>
+</layout>

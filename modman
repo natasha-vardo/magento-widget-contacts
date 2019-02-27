@@ -1,0 +1,5 @@
+src/app/code/local/CC/Widgetcontacts     app/code/local/CC/Widgetcontacts
+src/app/etc/modules/*    app/etc/modules/
+app/design/frontend/rwd/default/layout/*    app/design/frontend/rwd/default/layout/
+app/design/frontend/rwd/default/template/cc/*    app/design/frontend/rwd/default/template/cc/
+skin/frontend/rwd/default/css/*    skin/frontend/rwd/default/css/
