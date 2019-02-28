@@ -1,24 +1,23 @@
 <?php
 
-    class CC_Widgetcontacts_Block_Widget extends Mage_Core_Block_Template implements Mage_Widget_Block_Interface
+class CC_Widgetcontacts_Block_Widget extends Mage_Core_Block_Template implements Mage_Widget_Block_Interface
+{
+    /**
+     * @return string
+     */
+    protected function _toHtml(): string
     {
-        /**
-         * @return string
-         */
-        protected function _toHtml(): string
-        {
-            $companyName = Mage::getStoreConfig('widgetcontacts/global/company_name');
-            $companyPhone = Mage::getStoreConfig('widgetcontacts/global/company_phone');
+        $companyName = Mage::getStoreConfig('widgetcontacts/global/company_name');
+        $companyPhone = Mage::getStoreConfig('widgetcontacts/global/company_phone');
 
-            $companyAddressCountry = Mage::getStoreConfig('widgetcontacts/global/company_address_country');
-            $companyAddressCity = Mage::getStoreConfig('widgetcontacts/global/company_address_city');
-            $companyAddressStreet = Mage::getStoreConfig('widgetcontacts/global/company_address_street');
-            $companyAddressBuild = Mage::getStoreConfig('widgetcontacts/global/company_address_build');
+        $companyAddressCountry = Mage::getStoreConfig('widgetcontacts/global/company_address_country');
+        $companyAddressCity = Mage::getStoreConfig('widgetcontacts/global/company_address_city');
+        $companyAddressStreet = Mage::getStoreConfig('widgetcontacts/global/company_address_street');
+        $companyAddressBuild = Mage::getStoreConfig('widgetcontacts/global/company_address_build');
+        $address = sprintf('%s, %s, %s %s', $companyAddressCountry, $companyAddressCity, $companyAddressStreet, $companyAddressBuild);
 
-            $address = $companyAddressCountry.", ".$companyAddressCity.", ".$companyAddressStreet." ".$companyAddressBuild;
+        $html = sprintf('%s <br/> %s <br/> %s', $companyName, $address, $companyPhone);
 
-            $html = '<div><ul><li>'.$companyName.'</li><li>'.$address.'</li><li>'.$companyPhone.'</li></ul></div>';
-
-            return $html;
-        }
+        return $html;
     }
+}
