@@ -1,0 +1,58 @@
+<?php
+$helper = Mage::helper('widgetcontacts');
+$geoData = $helper->getGeoData();
+$geoData = json_encode($geoData);
+
+$height = $companyName = Mage::getStoreConfig('widgetcontacts/map_settings/height');
+$width = $companyName = Mage::getStoreConfig('widgetcontacts/map_settings/width');
+$zoom = $companyName = Mage::getStoreConfig('widgetcontacts/map_settings/zoom');
+?>
+<style>
+    #company-contacts-map {
+        height: <?php echo $height;?>px;
+        width: <?php echo $width;?>px;
+        margin: auto;
+    }
+</style>
+<div id="company-contacts-map"></div>
+
+<script type="text/javascript">
+
+    function initMap() {
+        let locations = <?php echo $geoData;?>;
+
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                let userLat = position.coords.latitude;
+                let userLng = position.coords.longitude;
+
+                if (userLat === undefined && userLng === undefined) {
+                    userLat = locations[0]['coordinates'][1];
+                    userLng = locations[0]['coordinates'][0];
+                }
+
+                let map = new google.maps.Map(document.getElementById('company-contacts-map'), {
+                    zoom: <?php echo $zoom;?>,
+                    center: new google.maps.LatLng(userLat,userLng)
+                });
+
+                let infowindow = new google.maps.InfoWindow();
+                let marker,i;
+
+                for (i = 0; i < locations.length; i++) {
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(locations[i]['coordinates'][1], locations[i]['coordinates'][0]),
+                        map: map
+                    });
+                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                        return function() {
+                            infowindow.setContent(locations[i]['title']);
+                            infowindow.open(map, marker);
+                        }
+                    })(marker, i));
+                }
+            });
+    }
+</script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCtSQcFe4O2TuU1L54_k96Kr0H0qpv_Ng&callback=initMap"
+        async defer></script>

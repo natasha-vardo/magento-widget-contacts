@@ -2,34 +2,62 @@
 
 class CC_Widgetcontacts_Helper_Data extends Mage_Core_Helper_Abstract
 {
+
+    CONST URL = 'http://geocode-maps.yandex.ru/1.x/?';
+
     /**
      * @return array
      */
-    public function getGeoData()
+    public function getGeoData(): array
     {
-        $companyAddressCountry = Mage::getStoreConfig('widgetcontacts/global/company_address_country');
-        $companyAddressCity = Mage::getStoreConfig('widgetcontacts/global/company_address_city');
-        $companyAddressStreet = Mage::getStoreConfig('widgetcontacts/global/company_address_street');
-        $companyAddressBuild = Mage::getStoreConfig('widgetcontacts/global/company_address_build');
-        $address = sprintf('%s, %s, %s %s', $companyAddressCountry, $companyAddressCity, $companyAddressStreet, $companyAddressBuild);
+        $adminData = Mage::getModel('widgetcontacts/block')->getCollection();
+        $shopData = [];
 
-        $params = [
-            'geocode' => $address,
-            'format'  => 'json',
-            'results' => 1
-        ];
-
-        $url = 'http://geocode-maps.yandex.ru/1.x/?';
-        $urlResponse = http_build_query($params, '', '&');
-        $response = file_get_contents($url . $urlResponse);
-        $responseDecode = json_decode($response);
-
-        if ($responseDecode->response->GeoObjectCollection->metaDataProperty->GeocoderResponseMetaData->found > 0)
-        {
-            $data = $responseDecode->response->GeoObjectCollection->featureMember[0]->GeoObject->Point->pos;
-            return $geoData = explode(' ', $data);
+        foreach($adminData as $data) {
+            $address = sprintf(
+                '%s, %s, %s %s',
+                $data->getCountry(),
+                $data->getCity(),
+                $data->getStreet(),
+                $data->getBuild()
+            );
+            $shopData[] = [
+                'title' => sprintf(
+                    '%s <br/> %s <br/> %s',
+                    $data->getName(),
+                    $address,
+                    $data->getPhone()
+                ),
+                'address' => $address
+            ];
         }
 
-        return $geoData = [];
+        $geoDataArray = [];
+
+        foreach($shopData as $data) {
+            $params = [
+                'geocode' => $data['address'],
+                'format'  => 'json',
+                'results' => 1
+            ];
+
+            $urlResponse = http_build_query($params, '', '&');
+            $response = file_get_contents(SELF::URL . $urlResponse);
+            $responseDecode = json_decode($response);
+
+            $GeoObjectCollection = $responseDecode->response->GeoObjectCollection;
+            $isFoundGeoData = $GeoObjectCollection->metaDataProperty->GeocoderResponseMetaData->found;
+
+            if ($isFoundGeoData > 0) {
+                $pointPosition = $GeoObjectCollection->featureMember[0]->GeoObject->Point->pos;
+                $geoData = explode(' ', $pointPosition);
+                $geoDataArray[] = [
+                    'title' => $data['title'],
+                    'coordinates' => $geoData
+                ];
+            }
+        }
+
+        return $geoDataArray;
     }
 }

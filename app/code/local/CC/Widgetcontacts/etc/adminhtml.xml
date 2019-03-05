@@ -15,8 +15,24 @@
                             </config>
                         </children>
                     </system>
+                    <children>
+                        <widgetcontacts translate="title" module="widgetcontacts">
+                            <title>Company Contacts</title>
+                        </widgetcontacts>
+                    </children>
                 </children>
             </admin>
         </resources>
     </acl>
+    <menu>
+        <system>
+            <children>
+                <widgetcontacts translate="title" module="widgetcontacts">
+                    <title>Company Contacts</title>
+                    <action>adminhtml/widgetcontacts</action>
+                    <sort_order>20</sort_order>
+                </widgetcontacts>
+            </children>
+        </system>
+    </menu>
 </config>
