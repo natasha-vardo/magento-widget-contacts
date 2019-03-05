@@ -2,7 +2,6 @@
 
 class CC_Widgetcontacts_Block_Adminhtml_Widgetcontacts_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -16,73 +15,82 @@ class CC_Widgetcontacts_Block_Adminhtml_Widgetcontacts_Edit_Form extends Mage_Ad
      */
     protected function _prepareForm(): Mage_Adminhtml_Block_Widget_Form
     {
-        $model = Mage::registry('widgetcontacts_block');
+        $widgetcontactsModel = Mage::registry('widgetcontacts_block');
         $form = new Varien_Data_Form(
-            array(
+            [
                 'id' => 'edit_form',
-                'action' => $this->getUrl('*/*/save',array('contact_id'=>$this->getRequest()->getParam('contact_id'))),
+                'action' => $this->getUrl(
+                    '*/*/save',
+                    ['contact_id'=>$this->getRequest()->getParam('contact_id')]
+                ),
                 'method' => 'post'
-            )
+            ]
         );
 
         $form->setHtmlIdPrefix('contact_');
 
-        $fieldset = $form->addFieldset('base_fieldset', array('legend'=>Mage::helper('widgetcontacts')->__('Address Information'), 'class' => 'fieldset-wide'));
+        $fieldset = $form->addFieldset(
+            'base_fieldset',
+            ['legend'=>Mage::helper('widgetcontacts')->__('Address Information'),
+                'class' => 'fieldset-wide']
+        );
 
-        if ($model->getBlockId()) {
-            $fieldset->addField('contact_id', 'hidden', array(
-                'name' => 'contact_id',
-            ));
+        if ($widgetcontactsModel->getBlockId()) {
+            $fieldset->addField(
+                'contact_id',
+                'hidden',
+                ['name' => 'contact_id',]
+            );
         }
 
-        $fieldset->addField('name', 'text', array(
+        $fieldset->addField('name', 'text', [
             'name'      => 'name',
             'label'     => Mage::helper('widgetcontacts')->__('Company Name'),
             'title'     => Mage::helper('widgetcontacts')->__('Company Name'),
             'required'  => true,
-        ));
+        ]);
 
 
-        $fieldset->addField('country', 'text', array(
+        $fieldset->addField('country', 'text', [
             'name'      => 'country',
             'label'     => Mage::helper('widgetcontacts')->__('Country'),
             'title'     => Mage::helper('widgetcontacts')->__('Country'),
             'required'  => true,
-        ));
+        ]);
 
 
-        $fieldset->addField('city', 'text', array(
+        $fieldset->addField('city', 'text', [
             'name'      => 'city',
             'label'     => Mage::helper('widgetcontacts')->__('City'),
             'title'     => Mage::helper('widgetcontacts')->__('City'),
             'required'  => true,
-        ));
+        ]);
 
 
-        $fieldset->addField('street', 'text', array(
+        $fieldset->addField('street', 'text', [
             'name'      => 'street',
             'label'     => Mage::helper('widgetcontacts')->__('Street'),
             'title'     => Mage::helper('widgetcontacts')->__('Street'),
             'required'  => true,
-        ));
+        ]);
 
 
-        $fieldset->addField('build', 'text', array(
+        $fieldset->addField('build', 'text', [
             'name'      => 'build',
             'label'     => Mage::helper('widgetcontacts')->__('Build'),
             'title'     => Mage::helper('widgetcontacts')->__('Build'),
             'required'  => true,
-        ));
+        ]);
 
 
-        $fieldset->addField('phone', 'text', array(
+        $fieldset->addField('phone', 'text', [
             'name'      => 'phone',
             'label'     => Mage::helper('widgetcontacts')->__('Company Phone Number'),
             'title'     => Mage::helper('widgetcontacts')->__('Company Phone Number'),
             'required'  => true,
-        ));
+        ]);
 
-        $form->setValues($model->getData());
+        $form->setValues($widgetcontactsModel->getData());
         $form->setUseContainer(true);
         $this->setForm($form);
 

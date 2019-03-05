@@ -46,9 +46,9 @@ class CC_Widgetcontacts_Helper_Data extends Mage_Core_Helper_Abstract
             $responseDecode = json_decode($response);
 
             $GeoObjectCollection = $responseDecode->response->GeoObjectCollection;
-            $isFoundGeoData = $GeoObjectCollection->metaDataProperty->GeocoderResponseMetaData->found;
+            $foundGeoData = $GeoObjectCollection->metaDataProperty->GeocoderResponseMetaData->found;
 
-            if ($isFoundGeoData > 0) {
+            if ($foundGeoData > 0) {
                 $pointPosition = $GeoObjectCollection->featureMember[0]->GeoObject->Point->pos;
                 $geoData = explode(' ', $pointPosition);
                 $geoDataArray[] = [

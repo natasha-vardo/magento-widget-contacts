@@ -12,18 +12,6 @@ class CC_Widgetcontacts_Block_Adminhtml_Widgetcontacts_Edit extends Mage_Adminht
 
         $this->_updateButton('save', 'label', Mage::helper('widgetcontacts')->__('Save Address'));
         $this->_updateButton('delete', 'label', Mage::helper('widgetcontacts')->__('Delete Address'));
-
-        $this->_addButton('saveandcontinue', array(
-            'label'     => Mage::helper('adminhtml')->__('Save and Continue Edit'),
-            'onclick'   => 'saveAndContinueEdit()',
-            'class'     => 'save',
-        ), -100);
-
-        $this->_formScripts[] = "
-            function saveAndContinueEdit(){
-                editForm.submit($('edit_form').action+'back/edit/');
-            }
-        ";
     }
 
     /**
@@ -38,8 +26,7 @@ class CC_Widgetcontacts_Block_Adminhtml_Widgetcontacts_Edit extends Mage_Adminht
                 ->__("Edit Address '%s'", $this
                     ->escapeHtml(Mage::registry('widgetcontacts_block')
                         ->getName()));
-        }
-        else {
+        } else {
             return Mage::helper('widgetcontacts')->__('New Address');
         }
     }

@@ -2,7 +2,6 @@
 
 class CC_Widgetcontacts_Block_Adminhtml_Widgetcontacts_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -29,48 +28,48 @@ class CC_Widgetcontacts_Block_Adminhtml_Widgetcontacts_Grid extends Mage_Adminht
     protected function _prepareColumns(): Mage_Adminhtml_Block_Widget_Grid
     {
 
-        $this->addColumn('name', array(
+        $this->addColumn('name',[
             'header'    => Mage::helper('widgetcontacts')->__('Company Name'),
             'align'     => 'left',
             'index'     => 'name',
-        ));
+        ]);
 
-        $this->addColumn('country', array(
+        $this->addColumn('country', [
             'header'    => Mage::helper('widgetcontacts')->__('Country'),
             'align'     => 'left',
             'index'     => 'country',
-        ));
+        ]);
 
-        $this->addColumn('city', array(
+        $this->addColumn('city', [
             'header'    => Mage::helper('widgetcontacts')->__('City'),
             'align'     => 'left',
             'index'     => 'city',
-        ));
+        ]);
 
-        $this->addColumn('street', array(
+        $this->addColumn('street', [
             'header'    => Mage::helper('widgetcontacts')->__('Street'),
             'align'     => 'left',
             'index'     => 'street',
-        ));
+        ]);
 
-        $this->addColumn('build', array(
+        $this->addColumn('build', [
             'header'    => Mage::helper('widgetcontacts')->__('Build'),
             'align'     => 'left',
             'index'     => 'build',
-        ));
+        ]);
 
-        $this->addColumn('phone', array(
+        $this->addColumn('phone', [
             'header'    => Mage::helper('widgetcontacts')->__('Company Phone Number'),
             'align'     => 'left',
             'index'     => 'phone',
-        ));
+        ]);
 
-        $this->addColumn('created_at', array(
+        $this->addColumn('created_at', [
             'header'    => Mage::helper('widgetcontacts')->__('Created At'),
             'index'     => 'created_at',
             'type'      => 'date',
 
-        ));
+        ]);
 
         return parent::_prepareColumns();
     }

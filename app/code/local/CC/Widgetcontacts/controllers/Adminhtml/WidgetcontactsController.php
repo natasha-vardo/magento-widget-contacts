@@ -2,7 +2,6 @@
 
 class CC_Widgetcontacts_Adminhtml_WidgetcontactsController extends Mage_Adminhtml_Controller_Action
 {
-
     public function indexAction()
     {
         $this->loadLayout();
@@ -17,8 +16,9 @@ class CC_Widgetcontacts_Adminhtml_WidgetcontactsController extends Mage_Adminhtm
 
     public function editAction()
     {
-        $id = $this->getRequest()->getParam('contact_id');
-        Mage::register('widgetcontacts_block',Mage::getModel('widgetcontacts/block')->load($id));
+        $contactId = $this->getRequest()->getParam('contact_id');
+
+        Mage::register('widgetcontacts_block',Mage::getModel('widgetcontacts/block')->load($contactId));
         $blockObject = (array)Mage::getSingleton('adminhtml/session')->getBlockObject(true);
         if(count($blockObject)) {
             Mage::registry('widgetcontacts_block')->setData($blockObject);
@@ -31,8 +31,8 @@ class CC_Widgetcontacts_Adminhtml_WidgetcontactsController extends Mage_Adminhtm
     public function saveAction()
     {
         try {
-            $id = $this->getRequest()->getParam('contact_id');
-            $block = Mage::getModel('widgetcontacts/block')->load($id);
+            $contactId = $this->getRequest()->getParam('contact_id');
+            $block = Mage::getModel('widgetcontacts/block')->load($contactId);
             $block
                 ->setData($this->getRequest()->getParams())
                 ->setCreatedAt(Mage::app()->getLocale()->date())
@@ -45,12 +45,15 @@ class CC_Widgetcontacts_Adminhtml_WidgetcontactsController extends Mage_Adminhtm
             Mage::logException($e);
             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
             Mage::getSingleton('adminhtml/session')->setBlockObject($block->getData());
-            return  $this->_redirect('*/*/edit',array('contact_id'=>$this->getRequest()->getParam('contact_id')));
+            return  $this->_redirect('*/*/edit',['contact_id'=>$this->getRequest()->getParam('contact_id')]);
         }
 
         Mage::getSingleton('adminhtml/session')->addSuccess('Address was saved successfully!');
 
-        $this->_redirect('*/*/'.$this->getRequest()->getParam('back','index'),array('contact_id'=>$block->getId()));
+        $this->_redirect('*/*/'.$this
+                ->getRequest()
+                ->getParam('back','index'),['contact_id'=>$block->getId()]
+        );
     }
 
     public function deleteAction()
