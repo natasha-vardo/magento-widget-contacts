@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+    <widgets>
+        <widgetcontacts_widget type="widgetcontacts/widget" module="widgetcontacts">
+            <name>Company Contacts</name>
+            <description>Contains company contacts</description>
+        </widgetcontacts_widget>
+    </widgets>

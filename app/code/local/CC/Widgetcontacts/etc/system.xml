@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <cc translate="label" module="widgetcontacts">
+            <label>Company Contacts</label>
+            <sort_order>10</sort_order>
+        </cc>
+    </tabs>
+    <sections>
+        <widgetcontacts translate="label" module="widgetcontacts">
+            <label>Map Settings</label>
+            <tab>cc</tab>
+            <frontend>text</frontend>
+            <sort_order>1</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <map_settings>
+                    <label>Map Settings</label>
+                    <expanded>1</expanded>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_Website>1</show_in_Website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <height>
+                            <label>Height(px)</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </height>
+                        <width>
+                            <label>Width(px)</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </width>
+                        <zoom>
+                            <label>Zoom</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </zoom>
+                    </fields>
+                </map_settings>
+            </groups>
+        </widgetcontacts>
+    </sections>
+</config>

@@ -1,0 +1,15 @@
+{
+    "name": "CC/Widgetcontacts",
+    "license": "OSL-3.0",
+    "type": "magento-module",
+    "description": "Module create widget for contacts data",
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    },
+    "authors":[
+        {
+            "name":"Natasha Vardomskaya",
+            "email":"nati_v@inbox.ru"
+        }
+    ]
+}
